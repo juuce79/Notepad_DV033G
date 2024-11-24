@@ -51,9 +51,8 @@ public class App extends JFrame implements ActionListener {
     JFrame f;
 
     private String path = "";
-    private String default_title = "Untitled.txt";
+    private static String defaultTitle = "Untitled.txt";
     private JFileChooser j;
-    private FileNameExtensionFilter filter;
 
     App() {
 
@@ -63,7 +62,7 @@ public class App extends JFrame implements ActionListener {
         JMenuBar mb = new JMenuBar();
 
         JScrollPane scroll = new JScrollPane(t);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         JMenu m1 = new JMenu("File");
         JMenu m2 = new JMenu("Edit");
@@ -150,16 +149,16 @@ public class App extends JFrame implements ActionListener {
 
         t.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             public void changedUpdate(javax.swing.event.DocumentEvent e) {
-                f.setTitle("notepad - " + default_title + " *");
+                f.setTitle("notepad - " + defaultTitle + " *");
             }
 
             public void removeUpdate(javax.swing.event.DocumentEvent e) {
-                f.setTitle("notepad - " + default_title + " *");
+                f.setTitle("notepad - " + defaultTitle + " *");
 
             }
 
             public void insertUpdate(javax.swing.event.DocumentEvent e) {
-                f.setTitle("notepad - " + default_title + " *");
+                f.setTitle("notepad - " + defaultTitle + " *");
             }
         });
 
@@ -198,7 +197,7 @@ public class App extends JFrame implements ActionListener {
                 "xml", "yml", "yaml", "md", "markdown", "sql" };
         j = new JFileChooser("C:");
         for (int i = 0; i < description.length; i++) {
-            filter = new FileNameExtensionFilter(description[i], extensions[i]);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(description[i], extensions[i]);
             j.addChoosableFileFilter(filter);
         }
         j.setAcceptAllFileFilterUsed(false);
@@ -261,12 +260,12 @@ public class App extends JFrame implements ActionListener {
     public void newFile() {
         // check if file contains a * which means it has been edited
         if (f.getTitle().contains("*")) {
-            int a = JOptionPane.showConfirmDialog(f, "Do you want to save changes to " + default_title + "?");
+            int a = JOptionPane.showConfirmDialog(f, "Do you want to save changes to " + defaultTitle + "?");
             if (a == JOptionPane.YES_OPTION) {
                 saveToPath();
                 t.setText("");
-                default_title = "Untitled.txt";
-                f.setTitle("notepad - " + default_title);
+
+                f.setTitle("notepad - " + defaultTitle);
                 path = "";
                 return;
 
@@ -274,8 +273,8 @@ public class App extends JFrame implements ActionListener {
             if (a == JOptionPane.NO_OPTION) {
                 path = "";
                 t.setText("");
-                default_title = "Untitled.txt";
-                f.setTitle("notepad - " + default_title);
+
+                f.setTitle("notepad - " + defaultTitle);
                 return;
             } else {
                 return;
@@ -283,8 +282,8 @@ public class App extends JFrame implements ActionListener {
         // if not saved, means file was just opened
         } else {
             t.setText("");
-            default_title = "Untitled.txt";
-            f.setTitle("notepad - " + default_title);
+
+            f.setTitle("notepad - " + defaultTitle);
             path = "";
         }
 
@@ -302,7 +301,7 @@ public class App extends JFrame implements ActionListener {
             BufferedWriter bw = new BufferedWriter(fw);
             t.write(bw);
             bw.close();
-            f.setTitle("notepad - " + default_title);
+            f.setTitle("notepad - " + defaultTitle);
         } catch (Exception evt) {
             JOptionPane.showMessageDialog(f, "Saving error" + evt.getMessage());
         }
@@ -325,8 +324,8 @@ public class App extends JFrame implements ActionListener {
                 w.write(t.getText());
                 w.flush();
                 w.close();
-                default_title = fi.getName();
-                f.setTitle("notepad" + " - " + default_title);
+                defaultTitle = fi.getName();
+                f.setTitle("notepad" + " - " + defaultTitle);
                 path = fi.getAbsolutePath();
             } catch (Exception evt) {
                 JOptionPane.showMessageDialog(f, "Saving error" + evt.getMessage());
@@ -353,8 +352,8 @@ public class App extends JFrame implements ActionListener {
                     sl = sl + "\n" + s1;
                 }
                 t.setText(sl);
-                default_title = fi.getName();
-                f.setTitle("notepad" + " - " + default_title);
+                defaultTitle = fi.getName();
+                f.setTitle("notepad" + " - " + defaultTitle);
                 path = fi.getAbsolutePath();
             } catch (Exception evt) {
                 JOptionPane.showMessageDialog(f, evt.getMessage());
