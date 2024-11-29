@@ -4,46 +4,30 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.File;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
 import javax.swing.JTextArea;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.ScrollBarUI;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.plaf.ScrollPaneUI;
-import javax.swing.plaf.basic.BasicScrollPaneUI;
 import javax.swing.KeyStroke;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.ScrollPaneLayout;
-import javax.swing.Scrollable;
 import javax.swing.AbstractAction;
-
-import javax.print.*;
 
 
 public class App extends JFrame implements ActionListener {
@@ -52,7 +36,7 @@ public class App extends JFrame implements ActionListener {
 
     private String path = "";
     private static String defaultTitle = "Untitled.txt";
-    private JFileChooser j;
+    private final JFileChooser j;
 
     App() {
 
@@ -147,17 +131,17 @@ public class App extends JFrame implements ActionListener {
             }
         });
 
-        t.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+        t.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
                 f.setTitle("notepad - " + defaultTitle + " *");
             }
 
-            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+            public void removeUpdate(DocumentEvent e) {
                 f.setTitle("notepad - " + defaultTitle + " *");
 
             }
 
-            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+            public void insertUpdate(DocumentEvent e) {
                 f.setTitle("notepad - " + defaultTitle + " *");
             }
         });
@@ -191,9 +175,9 @@ public class App extends JFrame implements ActionListener {
                 }
             }
         });
-        final String description[] = { "*.txt", "*.docx", "*.doc", "*.java", "*.py", "*.c", "*.cpp", "*.html", "*.css",
+        final String[] description = { "*.txt", "*.docx", "*.doc", "*.java", "*.py", "*.c", "*.cpp", "*.html", "*.css",
                 "*.js", "*.json", "*.xml", "*.yml", "*.yaml", "*.md", "*.markdown", "*.sql" };
-        final String extensions[] = { "txt", "docx", "doc", "java", "py", "c", "cpp", "html", "css", "js", "json",
+        final String[] extensions = { "txt", "docx", "doc", "java", "py", "c", "cpp", "html", "css", "js", "json",
                 "xml", "yml", "yaml", "md", "markdown", "sql" };
         j = new JFileChooser("C:");
         for (int i = 0; i < description.length; i++) {
@@ -204,7 +188,7 @@ public class App extends JFrame implements ActionListener {
     }
 
     /**
-     * @param ActionEvent Action Event listner for menu items
+     * @param e Action Event listner for menu items
      * @description Listens to the menu items and performs an action based on the
      *              menu item selected
      */
@@ -253,6 +237,8 @@ public class App extends JFrame implements ActionListener {
             case "close":
                 kill();
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + s);
         }
 
     }
@@ -275,9 +261,6 @@ public class App extends JFrame implements ActionListener {
                 t.setText("");
 
                 f.setTitle("notepad - " + defaultTitle);
-                return;
-            } else {
-                return;
             }
         // if not saved, means file was just opened
         } else {
@@ -297,8 +280,10 @@ public class App extends JFrame implements ActionListener {
             return;
         }
         try {
-            FileWriter fw = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(fw);
+            BufferedWriter bw;
+            try (FileWriter fw = new FileWriter(path)) {
+                bw = new BufferedWriter(fw);
+            }
             t.write(bw);
             bw.close();
             f.setTitle("notepad - " + defaultTitle);
@@ -318,8 +303,10 @@ public class App extends JFrame implements ActionListener {
         if (r == JFileChooser.APPROVE_OPTION) {
             File fi = new File(j.getSelectedFile().getAbsolutePath());
             try {
-                FileWriter wr = new FileWriter(fi, false);
-                BufferedWriter w = new BufferedWriter(wr);
+                BufferedWriter w;
+                try (FileWriter wr = new FileWriter(fi, false)) {
+                    w = new BufferedWriter(wr);
+                }
 
                 w.write(t.getText());
                 w.flush();
@@ -344,9 +331,12 @@ public class App extends JFrame implements ActionListener {
         if (r == JFileChooser.APPROVE_OPTION) {
             fi = new File(j.getSelectedFile().getAbsolutePath());
             try {
-                String s1 = "", sl = "";
-                FileReader fr = new FileReader(fi);
-                BufferedReader br = new BufferedReader(fr);
+                String s1 = "";
+                String sl = "";
+                BufferedReader br;
+                try (FileReader fr = new FileReader(fi)) {
+                    br = new BufferedReader(fr);
+                }
                 sl = br.readLine();
                 while ((s1 = br.readLine()) != null) {
                     sl = sl + "\n" + s1;
@@ -385,7 +375,7 @@ public class App extends JFrame implements ActionListener {
         return 1;
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         launch();
     }
 
