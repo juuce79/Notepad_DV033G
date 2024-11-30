@@ -2,9 +2,9 @@ name: Java CI
 
 on:
   push:
-    branches: [ main, github_actions_ci ]
+    branches: [ main, github_actions_ci, code_coverage_jacoco ]
   pull_request:
-    branches: [ main, github_actions_ci ]
+    branches: [ main, github_actions_ci, code_coverage_jacoco ]
 
 jobs:
   build:
