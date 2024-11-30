@@ -15,8 +15,8 @@ public class App extends JFrame implements ActionListener {
 
     JTextArea textArea;
     JFrame frame;
-    private String path = "";
-    private String defaultTitle = DEFAULT_TITLE_CONSTANT;
+    String path = "";
+    String defaultTitle = DEFAULT_TITLE_CONSTANT;
     JFileChooser fileChooser;
 
     // Menu Items

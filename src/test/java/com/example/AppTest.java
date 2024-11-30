@@ -11,6 +11,10 @@ import org.junit.jupiter.api.*;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.io.File;
+import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -179,5 +183,191 @@ class AppTest {
         // Verify the result
         assertEquals(0, result[0]);
         SwingUtilities.invokeAndWait(() -> assertFalse(app[0].frame.isVisible()));
+    }
+
+    @Test
+    void testKillWithUnsavedChanges() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Add text to trigger unsaved changes state
+        window.textBox().setText("Some unsaved text");
+        robot.waitForIdle();
+
+        // Verify title contains asterisk indicating unsaved changes
+        assertTrue(app[0].frame.getTitle().contains("*"), "Title should indicate unsaved changes");
+
+        // Trigger window closing
+        window.close();
+        robot.waitForIdle();
+
+        // Find and handle the confirmation dialog
+        DialogFixture dialog = WindowFinder.findDialog(JDialog.class)
+                .withTimeout(5000)
+                .using(robot);
+
+        // Click "No" on the save confirmation dialog
+        dialog.button(new GenericTypeMatcher<>(JButton.class) {
+            @Override
+            protected boolean isMatching(JButton button) {
+                return "No".equals(button.getText());
+            }
+        }).click();
+
+        // Verify the frame is closed
+        assertFalse(app[0].frame.isVisible(), "Frame should be closed after clicking No");
+
+        // Clean up
+        window.cleanUp();
+    }
+
+    @Test
+    void testDocumentListener() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Type text into the text area
+        window.textBox().enterText("New text");
+        robot.waitForIdle();
+
+        // Verify the title was updated with asterisk
+        assertEquals("notepad - Untitled.txt *", app[0].frame.getTitle());
+
+        // Clean up
+        window.cleanUp();
+    }
+
+    @Test
+    void testHandleMouseWheelEventZoomIn() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Get initial font size
+        int initialFontSize = app[0].textArea.getFont().getSize();
+
+        // Create and dispatch mouse wheel event
+        SwingUtilities.invokeAndWait(() -> {
+            MouseWheelEvent event = new MouseWheelEvent(
+                    app[0].textArea,
+                    MouseEvent.MOUSE_WHEEL,
+                    System.currentTimeMillis(),
+                    MouseEvent.ALT_DOWN_MASK,
+                    0, 0, 0, false,
+                    MouseWheelEvent.WHEEL_UNIT_SCROLL,
+                    1, -1
+            );
+            app[0].handleMouseWheelEvent(event);
+        });
+
+        robot.waitForIdle();
+
+        // Verify font size increased
+        assertEquals(initialFontSize + 1, app[0].textArea.getFont().getSize());
+
+        // Clean up
+        window.cleanUp();
+    }
+
+    @Test
+    void testSaveToPath() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Create temporary file
+        File tempFile = File.createTempFile("test", ".txt");
+        tempFile.deleteOnExit();
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+            app[0].path = tempFile.getAbsolutePath();
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Enter text into the text area
+        window.textBox().setText("Sample text");
+        robot.waitForIdle();
+
+        // Save the file
+        SwingUtilities.invokeAndWait(() -> app[0].saveToPath());
+        robot.waitForIdle();
+
+        // Verify file content
+        String content = Files.readString(tempFile.toPath());
+        assertEquals("Sample text", content);
+
+        // Clean up
+        window.cleanUp();
+    }
+
+    @Test
+    void testOpenFile() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Create temporary file with content
+        File tempFile = File.createTempFile("test", ".txt");
+        tempFile.deleteOnExit();
+        Files.write(tempFile.toPath(), "Test content".getBytes());
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Open the file using the app's open method
+        SwingUtilities.invokeAndWait(() -> {
+            app[0].fileChooser.setSelectedFile(tempFile);
+            app[0].open();
+        });
+        robot.waitForIdle();
+
+        // Verify the file content and metadata
+        assertEquals("Test content\n", app[0].textArea.getText());
+        assertEquals(tempFile.getName(), app[0].defaultTitle);
+        assertEquals("notepad - " + tempFile.getName(), app[0].frame.getTitle());
+        assertEquals(tempFile.getAbsolutePath(), app[0].path);
+
+        // Clean up
+        window.cleanUp();
     }
 }
