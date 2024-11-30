@@ -1,6 +1,7 @@
 package com.example;
 
 import org.assertj.swing.core.BasicRobot;
+import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
 import org.assertj.swing.finder.WindowFinder;
@@ -10,7 +11,6 @@ import org.junit.jupiter.api.*;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -117,46 +117,50 @@ class AppTest {
         });
     }
 
-//    @Test
-//    void testWindowClosing() throws Exception {
-//        final App[] app = new App[1];
-//        FrameFixture window;
-//
-//        // Initialize the app on the EDT and create FrameFixture
-//        SwingUtilities.invokeAndWait(() -> {
-//            app[0] = new App();
-//            app[0].frame.setVisible(true);
-//        });
-//
-//        // Create FrameFixture for AssertJ Swing
-//        window = new FrameFixture(robot, app[0].frame);
-//        window.show(); // Ensure the frame is visible
-//
-//        // Trigger window closing event
-//        SwingUtilities.invokeAndWait(() -> {
-//            app[0].frame.dispatchEvent(new WindowEvent(app[0].frame, WindowEvent.WINDOW_CLOSING));
-//        });
-//
-//        // Allow some time for the confirmation dialog to appear
-//        robot.waitForIdle();
-//
-//        // Assume the confirmation dialog is a JOptionPane
-//        // Find the active dialog
-//        DialogFixture dialog = WindowFinder.findDialog(JDialog.class).using(robot);
-//
-//        // Simulate pressing the Escape key on the dialog to cancel
-//        dialog.pressKey(KeyEvent.VK_ESCAPE);
-//
-//        // Verify that the frame is still visible and hasn't closed
-//        SwingUtilities.invokeAndWait(() -> {
-//            assertTrue(app[0].frame.isVisible(), "Frame should remain visible after canceling window closing.");
-//            assertEquals(WindowConstants.DO_NOTHING_ON_CLOSE, app[0].frame.getDefaultCloseOperation(),
-//                    "Default close operation should be DO_NOTHING_ON_CLOSE.");
-//        });
-//
-//        // Clean up the FrameFixture
-//        window.cleanUp();
-//    }
+    @Test
+    void testWindowClosing() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT and create FrameFixture
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show(); // Ensure the frame is visible
+
+        // Add some text to trigger the "unsaved changes" state
+        window.textBox().setText("Some unsaved text");
+        robot.waitForIdle();
+
+        // Trigger window closing event
+        window.close();
+        robot.waitForIdle();
+
+        // Wait for dialog using WindowFinder with specific timeout
+        DialogFixture dialog = WindowFinder.findDialog(JDialog.class)
+                .withTimeout(10000)
+                .using(robot);
+
+        // Find and click the Cancel button by text
+        dialog.button(new GenericTypeMatcher<>(JButton.class) {
+            @Override
+            protected boolean isMatching(JButton button) {
+                return "Cancel".equals(button.getText());
+            }
+        }).click();
+
+        // Verify that the frame is still visible and hasn't closed
+        assertTrue(app[0].frame.isVisible(), "Frame should remain visible after canceling window closing.");
+        assertEquals(WindowConstants.DO_NOTHING_ON_CLOSE, app[0].frame.getDefaultCloseOperation(),
+                "Default close operation should be DO_NOTHING_ON_CLOSE.");
+
+        // Clean up
+        window.cleanUp();
+    }
 
     @Test
     void testKillWithoutUnsavedChanges() throws Exception {
@@ -170,14 +174,10 @@ class AppTest {
 
         // Simulate kill without unsaved changes
         final int[] result = new int[1];
-        SwingUtilities.invokeAndWait(() -> {
-            result[0] = app[0].kill();
-        });
+        SwingUtilities.invokeAndWait(() -> result[0] = app[0].kill());
 
         // Verify the result
         assertEquals(0, result[0]);
-        SwingUtilities.invokeAndWait(() -> {
-            assertFalse(app[0].frame.isVisible());
-        });
+        SwingUtilities.invokeAndWait(() -> assertFalse(app[0].frame.isVisible()));
     }
 }
