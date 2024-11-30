@@ -1,74 +1,72 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="com.example.AppTest" time="6.837" errors="0" skipped="0">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.AppTest" time="2.974" tests="7" errors="0" skipped="0" failures="0">
   <properties>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="java.vm.version" value="17.0.13+11"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin"/>
-    <property name="maven.multiModuleProjectDirectory" value="D:\github\Notepad_DV033G"/>
-    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
-    <property name="java.vendor.url" value="https://adoptium.net/"/>
-    <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="path.separator" value=";"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="sun.os.patch.level" value=""/>
-    <property name="user.script" value=""/>
-    <property name="user.country" value="GB"/>
-    <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="D:\github\Notepad_DV033G"/>
-    <property name="java.vm.compressedOopsMode" value="Zero based"/>
-    <property name="java.runtime.version" value="17.0.13+11"/>
-    <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\juuce\AppData\Local\Temp\"/>
-    <property name="line.separator" value="
-"/>
-    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 11"/>
-    <property name="classworlds.conf" value="C:\maven\apache-maven-3.8.8\bin\m2.conf"/>
-    <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\PowerShell\7;C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Java\jdk-23\bin;C:\Users\juuce\AppData\Local\Android\Sdk\platform-tools;C:\Users\juuce\AppData\Local\Android\Sdk\cmdline-tools\bin;C:\Users\juuce\AppData\Local\Android\Sdk\build-tools\34.0.0;C:\Users\juuce\AppData\Local\Android\Sdk\build-tools\35.0.0;C:\maven\apache-maven-3.8.8\bin;C:\gradle\gradle-8.10.2\bin;C:\Users\juuce\AppData\Local\Programs\MiKTeX;C:\Users\juuce\AppData\Local\Programs\MiKTeX\miktex\bin\x64;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2024.2.3\plugins\maven\lib\maven3\bin;C:\Program Files\PowerShell\7\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\flutter\bin;C:\Users\juuce\AppData\Local\Programs\Python\Python313\;C:\Users\juuce\AppData\Local\Programs\Python\Launcher\;C:\Users\juuce\AppData\Local\Microsoft\WindowsApps;C:\Users\juuce\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\juuce\AppData\Roaming\npm;C:\Users\juuce\AppData\Local\Microsoft\WinGet\Packages\Martchus.syncthingtray_Microsoft.Winget.Source_8wekyb3d8bbwe;;."/>
-    <property name="maven.conf" value="C:\maven\apache-maven-3.8.8/conf"/>
-    <property name="jdk.debug" value="release"/>
-    <property name="java.class.version" value="61.0"/>
-    <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="10.0"/>
-    <property name="library.jansi.path" value="C:\maven\apache-maven-3.8.8\lib\jansi-native"/>
-    <property name="user.home" value="C:\Users\juuce"/>
-    <property name="user.timezone" value="Europe/Madrid"/>
-    <property name="file.encoding" value="Cp1252"/>
     <property name="java.specification.version" value="17"/>
-    <property name="user.name" value="juuce"/>
-    <property name="java.class.path" value="C:\maven\apache-maven-3.8.8\boot\plexus-classworlds-2.6.0.jar"/>
-    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="sun.awt.enableExtraMouseButtons" value="true"/>
+    <property name="java.class.path" value="D:\github\Notepad_DV033G\target\test-classes;D:\github\Notepad_DV033G\target\classes;C:\Users\juuce\.m2\repository\org\assertj\assertj-swing-junit\3.17.1\assertj-swing-junit-3.17.1.jar;C:\Users\juuce\.m2\repository\org\assertj\assertj-swing\3.17.1\assertj-swing-3.17.1.jar;C:\Users\juuce\.m2\repository\org\assertj\assertj-core\3.17.2\assertj-core-3.17.2.jar;C:\Users\juuce\.m2\repository\org\easytesting\fest-util\1.2.5\fest-util-1.2.5.jar;C:\Users\juuce\.m2\repository\org\easytesting\fest-reflect\1.4.1\fest-reflect-1.4.1.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\juuce\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\juuce\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\juuce\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\juuce\.m2\repository\org\mockito\mockito-core\5.8.0\mockito-core-5.8.0.jar;C:\Users\juuce\.m2\repository\net\bytebuddy\byte-buddy\1.14.10\byte-buddy-1.14.10.jar;C:\Users\juuce\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.10\byte-buddy-agent-1.14.10.jar;C:\Users\juuce\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\juuce\.m2\repository\org\mockito\mockito-junit-jupiter\5.8.0\mockito-junit-jupiter-5.8.0.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test jacoco:report"/>
-    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\juuce\AppData\Local\Temp\surefire15022863649283300775\surefirebooter-20241130194113630_3.jar C:\Users\juuce\AppData\Local\Temp\surefire15022863649283300775 2024-11-30T19-41-13_128-jvmRun1 surefire-20241130194113630_1tmp surefire_0-20241130194113630_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="D:\github\Notepad_DV033G\target\test-classes;D:\github\Notepad_DV033G\target\classes;C:\Users\juuce\.m2\repository\org\assertj\assertj-swing-junit\3.17.1\assertj-swing-junit-3.17.1.jar;C:\Users\juuce\.m2\repository\org\assertj\assertj-swing\3.17.1\assertj-swing-3.17.1.jar;C:\Users\juuce\.m2\repository\org\assertj\assertj-core\3.17.2\assertj-core-3.17.2.jar;C:\Users\juuce\.m2\repository\org\easytesting\fest-util\1.2.5\fest-util-1.2.5.jar;C:\Users\juuce\.m2\repository\org\easytesting\fest-reflect\1.4.1\fest-reflect-1.4.1.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\juuce\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\juuce\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\juuce\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\juuce\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\juuce\.m2\repository\org\mockito\mockito-core\5.8.0\mockito-core-5.8.0.jar;C:\Users\juuce\.m2\repository\net\bytebuddy\byte-buddy\1.14.10\byte-buddy-1.14.10.jar;C:\Users\juuce\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.10\byte-buddy-agent-1.14.10.jar;C:\Users\juuce\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\juuce\.m2\repository\org\mockito\mockito-junit-jupiter\5.8.0\mockito-junit-jupiter-5.8.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\juuce"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="java.version" value="17.0.13"/>
-    <property name="native.encoding" value="Cp1252"/>
-    <property name="java.vendor" value="Eclipse Adoptium"/>
-    <property name="sun.stderr.encoding" value="cp437"/>
-    <property name="java.specification.maintenance.version" value="1"/>
-    <property name="maven.home" value="C:\maven\apache-maven-3.8.8"/>
-    <property name="file.separator" value="\"/>
     <property name="java.version.date" value="2024-10-15"/>
-    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-    <property name="sun.cpu.endian" value="little"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="D:\github\Notepad_DV033G"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\juuce\AppData\Local\Temp\surefire15022863649283300775\surefirebooter-20241130194113630_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.13+11"/>
+    <property name="user.name" value="juuce"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="java.vendor.version" value="Temurin-17.0.13+11"/>
-    <property name="sun.stdout.encoding" value="cp437"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="localRepository" value="C:\Users\juuce\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\juuce\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.13"/>
+    <property name="user.dir" value="D:\github\Notepad_DV033G"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\PowerShell\7;C:\Program Files\Eclipse Adoptium\jdk-17.0.13.11-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Java\jdk-23\bin;C:\Users\juuce\AppData\Local\Android\Sdk\platform-tools;C:\Users\juuce\AppData\Local\Android\Sdk\cmdline-tools\bin;C:\Users\juuce\AppData\Local\Android\Sdk\build-tools\34.0.0;C:\Users\juuce\AppData\Local\Android\Sdk\build-tools\35.0.0;C:\maven\apache-maven-3.8.8\bin;C:\gradle\gradle-8.10.2\bin;C:\Users\juuce\AppData\Local\Programs\MiKTeX;C:\Users\juuce\AppData\Local\Programs\MiKTeX\miktex\bin\x64;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2024.2.3\plugins\maven\lib\maven3\bin;C:\Program Files\PowerShell\7\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\flutter\bin;C:\Users\juuce\AppData\Local\Programs\Python\Python313\;C:\Users\juuce\AppData\Local\Programs\Python\Launcher\;C:\Users\juuce\AppData\Local\Microsoft\WindowsApps;C:\Users\juuce\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\juuce\AppData\Roaming\npm;C:\Users\juuce\AppData\Local\Microsoft\WinGet\Packages\Martchus.syncthingtray_Microsoft.Winget.Source_8wekyb3d8bbwe;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.13+11"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase classname="com.example.AppTest" name="shouldAnswerWithTrue" time="0.651"/>
-  <testcase classname="com.example.AppTest" name="testInitializeMenuBar" time="1.274"/>
-  <testcase classname="com.example.AppTest" name="testInitializeFrame" time="0.718"/>
-  <testcase classname="com.example.AppTest" name="testAppConstructor" time="0.703"/>
-  <testcase classname="com.example.AppTest" name="testWindowClosing" time="1.003"/>
-  <testcase classname="com.example.AppTest" name="testInitializeTextArea" time="0.7"/>
-  <testcase classname="com.example.AppTest" name="testKillWithoutUnsavedChanges" time="0.707"/>
-  <testcase classname="com.example.AppTest" name="testKeyboardShortcuts" time="1.081"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.example.AppTest" time="0.066">
+    <system-out><![CDATA[Headless mode: null
+]]></system-out>
+  </testcase>
+  <testcase name="testInitializeMenuBar" classname="com.example.AppTest" time="0.702"/>
+  <testcase name="testInitializeFrame" classname="com.example.AppTest" time="0.152"/>
+  <testcase name="testAppConstructor" classname="com.example.AppTest" time="0.172"/>
+  <testcase name="testInitializeTextArea" classname="com.example.AppTest" time="0.169"/>
+  <testcase name="testKillWithoutUnsavedChanges" classname="com.example.AppTest" time="0.216"/>
+  <testcase name="testKeyboardShortcuts" classname="com.example.AppTest" time="0.574"/>
 </testsuite>

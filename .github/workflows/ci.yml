@@ -25,11 +25,19 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.java-version }}
 
-      - name: Build with Maven
-        run: mvn -B "-Djava.awt.headless=true" package
+      - name: Install Xvfb
+        run: sudo apt-get update && sudo apt-get install -y xvfb
 
-      - name: Run Tests with Headless Mode
-        run: mvn "-Djava.awt.headless=true" clean test jacoco:report
+      - name: Start Xvfb
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      - name: Build with Maven
+        run: mvn -B package
+
+      - name: Run Tests with JaCoCo
+        run: mvn clean test jacoco:report
 
       - name: Upload JaCoCo Report
         uses: actions/upload-artifact@v3

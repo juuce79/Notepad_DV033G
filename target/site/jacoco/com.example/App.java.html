@@ -141,10 +141,10 @@ public class App extends JFrame implements ActionListener {
 <span class="fc" id="L141">        frame.addWindowListener(new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent e) {
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">                if (kill() == 1) {</span>
-<span class="fc" id="L145">                    frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                if (kill() == 1) {</span>
+<span class="nc" id="L145">                    frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
                 }
-<span class="fc" id="L147">            }</span>
+<span class="nc" id="L147">            }</span>
         });
 <span class="fc" id="L149">    }</span>
 
@@ -258,9 +258,9 @@ public class App extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L261">        String command = e.getActionCommand();</span>
+<span class="fc" id="L261">        String command = e.getActionCommand();</span>
 
-<span class="nc bnc" id="L263" title="All 10 branches missed.">        switch (command) {</span>
+<span class="pc bnc" id="L263" title="All 10 branches missed.">        switch (command) {</span>
             case &quot;New&quot;:
 <span class="nc" id="L265">                newFile();</span>
 <span class="nc" id="L266">                break;</span>
@@ -329,7 +329,7 @@ public class App extends JFrame implements ActionListener {
      * Saves the current document to the existing path.
      */
     public void saveToPath() {
-<span class="nc bnc" id="L332" title="All 2 branches missed.">        if (path.isEmpty()) {</span>
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">        if (path.isEmpty()) {</span>
 <span class="nc" id="L333">            save();</span>
 <span class="nc" id="L334">            return;</span>
         }
@@ -417,26 +417,26 @@ public class App extends JFrame implements ActionListener {
      * @return 1 if the user chooses to cancel the exit, otherwise exits the application.
      */
     public int kill() {
-<span class="fc bfc" id="L420" title="All 2 branches covered.">        if (!frame.getTitle().contains(&quot;*&quot;)) {</span>
+<span class="pc bpc" id="L420" title="1 of 2 branches missed.">        if (!frame.getTitle().contains(&quot;*&quot;)) {</span>
 <span class="fc" id="L421">            frame.dispose();</span>
 <span class="fc" id="L422">            return 0;</span>
         }
 
-<span class="fc" id="L425">        int choice = JOptionPane.showConfirmDialog(frame,</span>
+<span class="nc" id="L425">        int choice = JOptionPane.showConfirmDialog(frame,</span>
                 &quot;Do you want to save the file before exiting?&quot;,
                 &quot;Confirm Exit&quot;,
                 JOptionPane.YES_NO_CANCEL_OPTION);
 
-<span class="pc bpc" id="L430" title="1 of 2 branches missed.">        if (choice == JOptionPane.YES_OPTION) {</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">        if (choice == JOptionPane.YES_OPTION) {</span>
 <span class="nc" id="L431">            save();</span>
 <span class="nc" id="L432">            frame.dispose();</span>
 <span class="nc" id="L433">            return 0;</span>
-<span class="pc bpc" id="L434" title="1 of 2 branches missed.">        } else if (choice == JOptionPane.NO_OPTION) {</span>
+<span class="nc bnc" id="L434" title="All 2 branches missed.">        } else if (choice == JOptionPane.NO_OPTION) {</span>
 <span class="nc" id="L435">            frame.dispose();</span>
 <span class="nc" id="L436">            return 0;</span>
         }
 
-<span class="fc" id="L439">        return 1;</span>
+<span class="nc" id="L439">        return 1;</span>
     }
 
     /**
