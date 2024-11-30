@@ -15,8 +15,8 @@ public class App extends JFrame implements ActionListener {
 
     JTextArea textArea;
     JFrame frame;
-<span class="fc" id="L18">    private String path = &quot;&quot;;</span>
-<span class="fc" id="L19">    private String defaultTitle = DEFAULT_TITLE_CONSTANT;</span>
+<span class="nc" id="L18">    private String path = &quot;&quot;;</span>
+<span class="nc" id="L19">    private String defaultTitle = DEFAULT_TITLE_CONSTANT;</span>
     JFileChooser fileChooser;
 
     // Menu Items
@@ -24,91 +24,91 @@ public class App extends JFrame implements ActionListener {
     private JMenuItem miOpen;
     private JMenuItem miSave;
 
-<span class="fc" id="L27">    public App() {</span>
-<span class="fc" id="L28">        initializeFrame();</span>
-<span class="fc" id="L29">        initializeTextArea();</span>
-<span class="fc" id="L30">        initializeMenuBar();</span>
-<span class="fc" id="L31">        initializeKeyboardShortcuts();</span>
-<span class="fc" id="L32">        initializeWindowListener();</span>
-<span class="fc" id="L33">        initializeDocumentListener();</span>
-<span class="fc" id="L34">        initializeMouseWheelListeners();</span>
-<span class="fc" id="L35">        initializeFileChooser();</span>
-<span class="fc" id="L36">    }</span>
+<span class="nc" id="L27">    public App() {</span>
+<span class="nc" id="L28">        initializeFrame();</span>
+<span class="nc" id="L29">        initializeTextArea();</span>
+<span class="nc" id="L30">        initializeMenuBar();</span>
+<span class="nc" id="L31">        initializeKeyboardShortcuts();</span>
+<span class="nc" id="L32">        initializeWindowListener();</span>
+<span class="nc" id="L33">        initializeDocumentListener();</span>
+<span class="nc" id="L34">        initializeMouseWheelListeners();</span>
+<span class="nc" id="L35">        initializeFileChooser();</span>
+<span class="nc" id="L36">    }</span>
 
     /**
      * Initializes the main application frame.
      */
     private void initializeFrame() {
-<span class="fc" id="L42">        frame = new JFrame(APP_TITLE_PREFIX + defaultTitle);</span>
-<span class="fc" id="L43">        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
-<span class="fc" id="L44">        frame.setSize(500, 500);</span>
-<span class="fc" id="L45">        frame.setLocationRelativeTo(null);</span>
-<span class="fc" id="L46">        frame.setResizable(true);</span>
-<span class="fc" id="L47">        frame.setVisible(true);</span>
-<span class="fc" id="L48">    }</span>
+<span class="nc" id="L42">        frame = new JFrame(APP_TITLE_PREFIX + defaultTitle);</span>
+<span class="nc" id="L43">        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc" id="L44">        frame.setSize(500, 500);</span>
+<span class="nc" id="L45">        frame.setLocationRelativeTo(null);</span>
+<span class="nc" id="L46">        frame.setResizable(true);</span>
+<span class="nc" id="L47">        frame.setVisible(true);</span>
+<span class="nc" id="L48">    }</span>
 
     /**
      * Initializes the text area and adds it to the frame within a scroll pane.
      */
     private void initializeTextArea() {
-<span class="fc" id="L54">        textArea = new JTextArea();</span>
-<span class="fc" id="L55">        textArea.setLineWrap(true);</span>
-<span class="fc" id="L56">        textArea.setWrapStyleWord(true);</span>
+<span class="nc" id="L54">        textArea = new JTextArea();</span>
+<span class="nc" id="L55">        textArea.setLineWrap(true);</span>
+<span class="nc" id="L56">        textArea.setWrapStyleWord(true);</span>
 
-<span class="fc" id="L58">        JScrollPane scrollPane = new JScrollPane(textArea);</span>
-<span class="fc" id="L59">        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);</span>
-<span class="fc" id="L60">        frame.add(scrollPane);</span>
-<span class="fc" id="L61">    }</span>
+<span class="nc" id="L58">        JScrollPane scrollPane = new JScrollPane(textArea);</span>
+<span class="nc" id="L59">        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);</span>
+<span class="nc" id="L60">        frame.add(scrollPane);</span>
+<span class="nc" id="L61">    }</span>
 
     /**
      * Initializes the menu bar with &quot;File&quot; and &quot;Edit&quot; menus and their respective menu items.
      */
     private void initializeMenuBar() {
-<span class="fc" id="L67">        JMenuBar menuBar = new JMenuBar();</span>
+<span class="nc" id="L67">        JMenuBar menuBar = new JMenuBar();</span>
 
         // File Menu
-<span class="fc" id="L70">        JMenu fileMenu = new JMenu(&quot;File&quot;);</span>
-<span class="fc" id="L71">        miNew = new JMenuItem(&quot;New&quot;);</span>
-<span class="fc" id="L72">        miOpen = new JMenuItem(&quot;Open&quot;);</span>
-<span class="fc" id="L73">        miSave = new JMenuItem(&quot;Save&quot;);</span>
-<span class="fc" id="L74">        JMenuItem miSaveAs = new JMenuItem(&quot;Save as&quot;);</span>
-<span class="fc" id="L75">        JMenuItem miPrint = new JMenuItem(&quot;Print&quot;);</span>
-<span class="fc" id="L76">        JMenuItem miClose = new JMenuItem(&quot;Close&quot;);</span>
+<span class="nc" id="L70">        JMenu fileMenu = new JMenu(&quot;File&quot;);</span>
+<span class="nc" id="L71">        miNew = new JMenuItem(&quot;New&quot;);</span>
+<span class="nc" id="L72">        miOpen = new JMenuItem(&quot;Open&quot;);</span>
+<span class="nc" id="L73">        miSave = new JMenuItem(&quot;Save&quot;);</span>
+<span class="nc" id="L74">        JMenuItem miSaveAs = new JMenuItem(&quot;Save as&quot;);</span>
+<span class="nc" id="L75">        JMenuItem miPrint = new JMenuItem(&quot;Print&quot;);</span>
+<span class="nc" id="L76">        JMenuItem miClose = new JMenuItem(&quot;Close&quot;);</span>
 
         // Add action listeners
-<span class="fc" id="L79">        ActionListener menuListener = this;</span>
-<span class="fc" id="L80">        JMenuItem[] fileMenuItems = { miNew, miOpen, miSave, miSaveAs, miPrint, miClose};</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (JMenuItem item : fileMenuItems) {</span>
-<span class="fc" id="L82">            item.addActionListener(menuListener);</span>
-<span class="fc" id="L83">            fileMenu.add(item);</span>
+<span class="nc" id="L79">        ActionListener menuListener = this;</span>
+<span class="nc" id="L80">        JMenuItem[] fileMenuItems = { miNew, miOpen, miSave, miSaveAs, miPrint, miClose};</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        for (JMenuItem item : fileMenuItems) {</span>
+<span class="nc" id="L82">            item.addActionListener(menuListener);</span>
+<span class="nc" id="L83">            fileMenu.add(item);</span>
         }
 
         // Edit Menu
-<span class="fc" id="L87">        JMenu editMenu = new JMenu(&quot;Edit&quot;);</span>
-<span class="fc" id="L88">        JMenuItem miCut = new JMenuItem(&quot;Cut&quot;);</span>
-<span class="fc" id="L89">        JMenuItem miCopy = new JMenuItem(&quot;Copy&quot;);</span>
-<span class="fc" id="L90">        JMenuItem miPaste = new JMenuItem(&quot;Paste&quot;);</span>
+<span class="nc" id="L87">        JMenu editMenu = new JMenu(&quot;Edit&quot;);</span>
+<span class="nc" id="L88">        JMenuItem miCut = new JMenuItem(&quot;Cut&quot;);</span>
+<span class="nc" id="L89">        JMenuItem miCopy = new JMenuItem(&quot;Copy&quot;);</span>
+<span class="nc" id="L90">        JMenuItem miPaste = new JMenuItem(&quot;Paste&quot;);</span>
 
-<span class="fc" id="L92">        JMenuItem[] editMenuItems = {miCut, miCopy, miPaste};</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (JMenuItem item : editMenuItems) {</span>
-<span class="fc" id="L94">            item.addActionListener(menuListener);</span>
-<span class="fc" id="L95">            editMenu.add(item);</span>
+<span class="nc" id="L92">        JMenuItem[] editMenuItems = {miCut, miCopy, miPaste};</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        for (JMenuItem item : editMenuItems) {</span>
+<span class="nc" id="L94">            item.addActionListener(menuListener);</span>
+<span class="nc" id="L95">            editMenu.add(item);</span>
         }
 
         // Add menus to the menu bar
-<span class="fc" id="L99">        menuBar.add(fileMenu);</span>
-<span class="fc" id="L100">        menuBar.add(editMenu);</span>
+<span class="nc" id="L99">        menuBar.add(fileMenu);</span>
+<span class="nc" id="L100">        menuBar.add(editMenu);</span>
 
-<span class="fc" id="L102">        frame.setJMenuBar(menuBar);</span>
-<span class="fc" id="L103">    }</span>
+<span class="nc" id="L102">        frame.setJMenuBar(menuBar);</span>
+<span class="nc" id="L103">    }</span>
 
     /**
      * Initializes keyboard shortcuts for common actions like Save, Open, and New.
      */
     private void initializeKeyboardShortcuts() {
         // Save Shortcut
-<span class="fc" id="L110">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control S&quot;), &quot;save&quot;);</span>
-<span class="fc" id="L111">        textArea.getActionMap().put(&quot;save&quot;, new AbstractAction() {</span>
+<span class="nc" id="L110">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control S&quot;), &quot;save&quot;);</span>
+<span class="nc" id="L111">        textArea.getActionMap().put(&quot;save&quot;, new AbstractAction() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
 <span class="nc" id="L114">                miSave.doClick();</span>
@@ -116,8 +116,8 @@ public class App extends JFrame implements ActionListener {
         });
 
         // Open Shortcut
-<span class="fc" id="L119">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control O&quot;), &quot;open&quot;);</span>
-<span class="fc" id="L120">        textArea.getActionMap().put(&quot;open&quot;, new AbstractAction() {</span>
+<span class="nc" id="L119">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control O&quot;), &quot;open&quot;);</span>
+<span class="nc" id="L120">        textArea.getActionMap().put(&quot;open&quot;, new AbstractAction() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
 <span class="nc" id="L123">                miOpen.doClick();</span>
@@ -125,34 +125,34 @@ public class App extends JFrame implements ActionListener {
         });
 
         // New Shortcut
-<span class="fc" id="L128">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control N&quot;), &quot;new&quot;);</span>
-<span class="fc" id="L129">        textArea.getActionMap().put(&quot;new&quot;, new AbstractAction() {</span>
+<span class="nc" id="L128">        textArea.getInputMap().put(KeyStroke.getKeyStroke(&quot;control N&quot;), &quot;new&quot;);</span>
+<span class="nc" id="L129">        textArea.getActionMap().put(&quot;new&quot;, new AbstractAction() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
 <span class="nc" id="L132">                miNew.doClick();</span>
 <span class="nc" id="L133">            }</span>
         });
-<span class="fc" id="L135">    }</span>
+<span class="nc" id="L135">    }</span>
 
     /**
      * Initializes window listener to handle the window closing event.
      */
     private void initializeWindowListener() {
-<span class="fc" id="L141">        frame.addWindowListener(new WindowAdapter() {</span>
+<span class="nc" id="L141">        frame.addWindowListener(new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent e) {
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">                if (kill() == 1) {</span>
-<span class="fc" id="L145">                    frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                if (kill() == 1) {</span>
+<span class="nc" id="L145">                    frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);</span>
                 }
-<span class="fc" id="L147">            }</span>
+<span class="nc" id="L147">            }</span>
         });
-<span class="fc" id="L149">    }</span>
+<span class="nc" id="L149">    }</span>
 
     /**
      * Initializes document listener to detect changes in the text area.
      */
     private void initializeDocumentListener() {
-<span class="fc" id="L155">        textArea.getDocument().addDocumentListener(new DocumentListener() {</span>
+<span class="nc" id="L155">        textArea.getDocument().addDocumentListener(new DocumentListener() {</span>
             public void changedUpdate(DocumentEvent e) {
 <span class="nc" id="L157">                updateFrameTitle(true);</span>
 <span class="nc" id="L158">            }</span>
@@ -162,17 +162,17 @@ public class App extends JFrame implements ActionListener {
 <span class="nc" id="L162">            }</span>
 
             public void insertUpdate(DocumentEvent e) {
-<span class="fc" id="L165">                updateFrameTitle(true);</span>
-<span class="fc" id="L166">            }</span>
+<span class="nc" id="L165">                updateFrameTitle(true);</span>
+<span class="nc" id="L166">            }</span>
         });
-<span class="fc" id="L168">    }</span>
+<span class="nc" id="L168">    }</span>
 
     /**
      * Initializes mouse wheel listeners for scrolling and zooming functionalities.
      */
     private void initializeMouseWheelListeners() {
-<span class="fc" id="L174">        textArea.addMouseWheelListener(this::handleMouseWheelEvent);</span>
-<span class="fc" id="L175">    }</span>
+<span class="nc" id="L174">        textArea.addMouseWheelListener(this::handleMouseWheelEvent);</span>
+<span class="nc" id="L175">    }</span>
 
     /**
      * Handles mouse wheel events for scrolling and zooming.
@@ -225,20 +225,20 @@ public class App extends JFrame implements ActionListener {
      * Initializes the file chooser with specific file filters.
      */
     private void initializeFileChooser() {
-<span class="fc" id="L228">        String[] descriptions = { &quot;*.txt&quot;, &quot;*.docx&quot;, &quot;*.doc&quot;, &quot;*.java&quot;, &quot;*.py&quot;, &quot;*.c&quot;, &quot;*.cpp&quot;,</span>
+<span class="nc" id="L228">        String[] descriptions = { &quot;*.txt&quot;, &quot;*.docx&quot;, &quot;*.doc&quot;, &quot;*.java&quot;, &quot;*.py&quot;, &quot;*.c&quot;, &quot;*.cpp&quot;,</span>
                 &quot;*.html&quot;, &quot;*.css&quot;, &quot;*.js&quot;, &quot;*.json&quot;, &quot;*.xml&quot;, &quot;*.yml&quot;, &quot;*.yaml&quot;,
                 &quot;*.md&quot;, &quot;*.markdown&quot;, &quot;*.sql&quot; };
-<span class="fc" id="L231">        String[] extensions = { &quot;txt&quot;, &quot;docx&quot;, &quot;doc&quot;, &quot;java&quot;, &quot;py&quot;, &quot;c&quot;, &quot;cpp&quot;,</span>
+<span class="nc" id="L231">        String[] extensions = { &quot;txt&quot;, &quot;docx&quot;, &quot;doc&quot;, &quot;java&quot;, &quot;py&quot;, &quot;c&quot;, &quot;cpp&quot;,</span>
                 &quot;html&quot;, &quot;css&quot;, &quot;js&quot;, &quot;json&quot;, &quot;xml&quot;, &quot;yml&quot;, &quot;yaml&quot;,
                 &quot;md&quot;, &quot;markdown&quot;, &quot;sql&quot; };
 
-<span class="fc" id="L235">        fileChooser = new JFileChooser(&quot;C:&quot;);</span>
-<span class="fc bfc" id="L236" title="All 2 branches covered.">        for (int i = 0; i &lt; descriptions.length; i++) {</span>
-<span class="fc" id="L237">            FileNameExtensionFilter filter = new FileNameExtensionFilter(descriptions[i], extensions[i]);</span>
-<span class="fc" id="L238">            fileChooser.addChoosableFileFilter(filter);</span>
+<span class="nc" id="L235">        fileChooser = new JFileChooser(&quot;C:&quot;);</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        for (int i = 0; i &lt; descriptions.length; i++) {</span>
+<span class="nc" id="L237">            FileNameExtensionFilter filter = new FileNameExtensionFilter(descriptions[i], extensions[i]);</span>
+<span class="nc" id="L238">            fileChooser.addChoosableFileFilter(filter);</span>
         }
-<span class="fc" id="L240">        fileChooser.setAcceptAllFileFilterUsed(false);</span>
-<span class="fc" id="L241">    }</span>
+<span class="nc" id="L240">        fileChooser.setAcceptAllFileFilterUsed(false);</span>
+<span class="nc" id="L241">    }</span>
 
     /**
      * Updates the frame title based on whether the document has unsaved changes.
@@ -246,12 +246,12 @@ public class App extends JFrame implements ActionListener {
      * @param modified indicates if the document has been modified
      */
     private void updateFrameTitle(boolean modified) {
-<span class="pc bpc" id="L249" title="1 of 2 branches missed.">        if (modified) {</span>
-<span class="fc" id="L250">            frame.setTitle(APP_TITLE_PREFIX + defaultTitle + &quot; *&quot;);</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        if (modified) {</span>
+<span class="nc" id="L250">            frame.setTitle(APP_TITLE_PREFIX + defaultTitle + &quot; *&quot;);</span>
         } else {
 <span class="nc" id="L252">            frame.setTitle(APP_TITLE_PREFIX + defaultTitle);</span>
         }
-<span class="fc" id="L254">    }</span>
+<span class="nc" id="L254">    }</span>
 
     /**
      * Handles menu item actions based on their command.
@@ -417,26 +417,26 @@ public class App extends JFrame implements ActionListener {
      * @return 1 if the user chooses to cancel the exit, otherwise exits the application.
      */
     public int kill() {
-<span class="fc bfc" id="L420" title="All 2 branches covered.">        if (!frame.getTitle().contains(&quot;*&quot;)) {</span>
-<span class="fc" id="L421">            frame.dispose();</span>
-<span class="fc" id="L422">            return 0;</span>
+<span class="nc bnc" id="L420" title="All 2 branches missed.">        if (!frame.getTitle().contains(&quot;*&quot;)) {</span>
+<span class="nc" id="L421">            frame.dispose();</span>
+<span class="nc" id="L422">            return 0;</span>
         }
 
-<span class="fc" id="L425">        int choice = JOptionPane.showConfirmDialog(frame,</span>
+<span class="nc" id="L425">        int choice = JOptionPane.showConfirmDialog(frame,</span>
                 &quot;Do you want to save the file before exiting?&quot;,
                 &quot;Confirm Exit&quot;,
                 JOptionPane.YES_NO_CANCEL_OPTION);
 
-<span class="pc bpc" id="L430" title="1 of 2 branches missed.">        if (choice == JOptionPane.YES_OPTION) {</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">        if (choice == JOptionPane.YES_OPTION) {</span>
 <span class="nc" id="L431">            save();</span>
 <span class="nc" id="L432">            frame.dispose();</span>
 <span class="nc" id="L433">            return 0;</span>
-<span class="pc bpc" id="L434" title="1 of 2 branches missed.">        } else if (choice == JOptionPane.NO_OPTION) {</span>
+<span class="nc bnc" id="L434" title="All 2 branches missed.">        } else if (choice == JOptionPane.NO_OPTION) {</span>
 <span class="nc" id="L435">            frame.dispose();</span>
 <span class="nc" id="L436">            return 0;</span>
         }
 
-<span class="fc" id="L439">        return 1;</span>
+<span class="nc" id="L439">        return 1;</span>
     }
 
     /**

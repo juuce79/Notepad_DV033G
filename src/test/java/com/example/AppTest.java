@@ -23,7 +23,8 @@ public class AppTest extends AssertJSwingJUnitTestCase {
      */
     @BeforeClass
     public static void setUpHeadless() {
-        System.setProperty("java.awt.headless", "true");
+//        System.setProperty("java.awt.headless", "true");
+        System.out.println("Headless mode: " + System.getProperty("java.awt.headless"));
     }
 
     /**
