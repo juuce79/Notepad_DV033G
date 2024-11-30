@@ -19,10 +19,43 @@
   </properties>
 
   <dependencies>
+    <!-- assertj dependency -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-swing-junit</artifactId>
+      <version>3.17.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- junit dependency -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- junit 5 dependency -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- mockito dependency -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.8.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- mockito junit 5 dependency -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>5.8.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

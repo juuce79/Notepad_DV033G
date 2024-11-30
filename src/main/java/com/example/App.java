@@ -17,7 +17,7 @@ public class App extends JFrame implements ActionListener {
     JFrame frame;
     private String path = "";
     private String defaultTitle = DEFAULT_TITLE_CONSTANT;
-    private JFileChooser fileChooser;
+    JFileChooser fileChooser;
 
     // Menu Items
     private JMenuItem miNew;
@@ -179,7 +179,7 @@ public class App extends JFrame implements ActionListener {
      *
      * @param e the mouse wheel event
      */
-    private void handleMouseWheelEvent(MouseWheelEvent e) {
+    void handleMouseWheelEvent(MouseWheelEvent e) {
         if (e.isAltDown()) {
             handleZoom(e);
         } else {
@@ -366,7 +366,7 @@ public class App extends JFrame implements ActionListener {
     /**
      * Opens a file selected by the user.
      */
-    private void open() {
+    void open() {
         int result = fileChooser.showOpenDialog(frame);
         File selectedFile;
 
@@ -394,7 +394,7 @@ public class App extends JFrame implements ActionListener {
     /**
      * Prints the current document.
      */
-    private void printFile() {
+    void printFile() {
         if (path.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please save or open a file first");
             return;
@@ -416,9 +416,10 @@ public class App extends JFrame implements ActionListener {
      *
      * @return 1 if the user chooses to cancel the exit, otherwise exits the application.
      */
-    private int kill() {
+    public int kill() {
         if (!frame.getTitle().contains("*")) {
-            System.exit(0);
+            frame.dispose();
+            return 0;
         }
 
         int choice = JOptionPane.showConfirmDialog(frame,
@@ -428,12 +429,14 @@ public class App extends JFrame implements ActionListener {
 
         if (choice == JOptionPane.YES_OPTION) {
             save();
-            System.exit(0);
+            frame.dispose();
+            return 0;
         } else if (choice == JOptionPane.NO_OPTION) {
-            System.exit(0);
+            frame.dispose();
+            return 0;
         }
 
-        return 1; // If CANCEL_OPTION, do nothing
+        return 1;
     }
 
     /**
