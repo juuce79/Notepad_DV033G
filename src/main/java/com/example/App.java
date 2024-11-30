@@ -21,7 +21,7 @@ public class App extends JFrame implements ActionListener {
 
     // Menu Items
     private JMenuItem miNew;
-    private JMenuItem miOpen;
+    JMenuItem miOpen;
     private JMenuItem miSave;
 
     public App() {

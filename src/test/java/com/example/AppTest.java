@@ -4,9 +4,11 @@ import org.assertj.swing.core.BasicRobot;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
+import org.assertj.swing.finder.JFileChooserFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.fixture.FrameFixture;
+import org.assertj.swing.fixture.JFileChooserFixture;
 import org.junit.jupiter.api.*;
 
 import javax.swing.*;
@@ -17,6 +19,9 @@ import java.io.File;
 import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppTest {
@@ -337,28 +342,26 @@ class AppTest {
     @Test
     void testOpenFile() throws Exception {
         final App[] app = new App[1];
-        FrameFixture window;
 
         // Create temporary file with content
         File tempFile = File.createTempFile("test", ".txt");
         tempFile.deleteOnExit();
         Files.write(tempFile.toPath(), "Test content".getBytes());
 
+        // Mock JFileChooser to return the tempFile when showOpenDialog is called
+        JFileChooser mockFileChooser = mock(JFileChooser.class);
+        when(mockFileChooser.showOpenDialog(any())).thenReturn(JFileChooser.APPROVE_OPTION);
+        when(mockFileChooser.getSelectedFile()).thenReturn(tempFile);
+
         // Initialize the app on the EDT
         SwingUtilities.invokeAndWait(() -> {
             app[0] = new App();
+            app[0].fileChooser = mockFileChooser; // Inject the mock
             app[0].frame.setVisible(true);
         });
 
-        // Create FrameFixture for AssertJ Swing
-        window = new FrameFixture(robot, app[0].frame);
-        window.show();
-
-        // Open the file using the app's open method
-        SwingUtilities.invokeAndWait(() -> {
-            app[0].fileChooser.setSelectedFile(tempFile);
-            app[0].open();
-        });
+        // Trigger the open action
+        SwingUtilities.invokeAndWait(() -> app[0].miOpen.doClick());
         robot.waitForIdle();
 
         // Verify the file content and metadata
@@ -368,6 +371,8 @@ class AppTest {
         assertEquals(tempFile.getAbsolutePath(), app[0].path);
 
         // Clean up
-        window.cleanUp();
+        if (app[0].frame.isVisible()) {
+            SwingUtilities.invokeAndWait(() -> app[0].frame.dispose());
+        }
     }
 }
