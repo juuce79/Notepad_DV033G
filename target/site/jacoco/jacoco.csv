@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-notepad,com.example,App.new AbstractAction() {...},11,0,0,0,3,0,2,0,2,0
-notepad,com.example,App,906,0,52,0,197,0,53,0,23,0
-notepad,com.example,App.new AbstractAction() {...},11,0,0,0,3,0,2,0,2,0
-notepad,com.example,App.new AbstractAction() {...},11,0,0,0,3,0,2,0,2,0
-notepad,com.example,App.new DocumentListener() {...},21,0,0,0,7,0,4,0,4,0
-notepad,com.example,App.new WindowAdapter() {...},17,0,2,0,4,0,3,0,2,0
+notepad,com.example,App.new AbstractAction() {...},5,6,0,0,2,1,1,1,1,1
+notepad,com.example,App,368,538,41,11,115,82,38,15,12,11
+notepad,com.example,App.new AbstractAction() {...},5,6,0,0,2,1,1,1,1,1
+notepad,com.example,App.new AbstractAction() {...},5,6,0,0,2,1,1,1,1,1
+notepad,com.example,App.new DocumentListener() {...},10,11,0,0,4,3,2,2,2,2
+notepad,com.example,App.new WindowAdapter() {...},0,17,1,1,0,4,1,2,0,2
