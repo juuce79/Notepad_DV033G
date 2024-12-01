@@ -4,14 +4,15 @@ import org.assertj.swing.core.BasicRobot;
 import org.assertj.swing.core.GenericTypeMatcher;
 import org.assertj.swing.core.Robot;
 import org.assertj.swing.edt.FailOnThreadViolationRepaintManager;
-import org.assertj.swing.finder.JFileChooserFinder;
 import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.fixture.FrameFixture;
-import org.assertj.swing.fixture.JFileChooserFixture;
 import org.junit.jupiter.api.*;
+import org.mockito.MockedStatic;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -20,8 +21,7 @@ import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppTest {
@@ -374,5 +374,135 @@ class AppTest {
         if (app[0].frame.isVisible()) {
             SwingUtilities.invokeAndWait(() -> app[0].frame.dispose());
         }
+    }
+
+    @Test
+    void testUpdateFrameTitle() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Test with modified flag true
+        SwingUtilities.invokeAndWait(() -> app[0].updateFrameTitle(true));
+        robot.waitForIdle();
+        assertEquals("notepad - Untitled.txt *", app[0].frame.getTitle());
+
+        // Test with modified flag false
+        SwingUtilities.invokeAndWait(() -> app[0].updateFrameTitle(false));
+        robot.waitForIdle();
+        assertEquals("notepad - Untitled.txt", app[0].frame.getTitle());
+
+        // Clean up
+        window.cleanUp();
+    }
+
+    @Test
+    void testResetEditor() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+
+            // Set initial state
+            app[0].textArea.setText("Some text");
+            app[0].defaultTitle = "ChangedTitle.txt";
+            app[0].path = "/path/to/file.txt";
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Reset the editor
+        SwingUtilities.invokeAndWait(() -> app[0].resetEditor());
+        robot.waitForIdle();
+
+        // Verify the reset state
+        assertEquals("", app[0].textArea.getText());
+        assertEquals("Untitled.txt", app[0].defaultTitle);
+        assertEquals("notepad - Untitled.txt", app[0].frame.getTitle());
+        assertEquals("", app[0].path);
+
+        // Clean up
+        window.cleanUp();
+    }
+
+//    @Test
+//    void testActionPerformed_New() throws Exception {
+//        final App[] app = new App[1];
+//
+//        // Mock JFileChooser
+//        JFileChooser mockFileChooser = mock(JFileChooser.class);
+//        when(mockFileChooser.showSaveDialog(any())).thenReturn(JFileChooser.CANCEL_OPTION);
+//
+//        // Mock JOptionPane
+//        try (MockedStatic<JOptionPane> mockedPane = mockStatic(JOptionPane.class)) {
+//            mockedPane.when(() -> JOptionPane.showConfirmDialog(
+//                            any(Component.class),
+//                            anyString(),
+//                            anyString(),
+//                            anyInt()))
+//                    .thenReturn(JOptionPane.NO_OPTION);
+//
+//            // Initialize the app on the EDT
+//            SwingUtilities.invokeAndWait(() -> {
+//                app[0] = new App();
+//                app[0].fileChooser = mockFileChooser; // Inject the mock
+//                app[0].frame.setVisible(true);
+//                app[0].textArea.setText("Unsaved changes");
+//                app[0].updateFrameTitle(true);
+//            });
+//
+//            // Trigger new file action using menu item
+//            SwingUtilities.invokeAndWait(() -> app[0].miNew.doClick());
+//            robot.waitForIdle();
+//
+//            // Verify the results
+//            assertEquals("", app[0].textArea.getText());
+//            assertEquals("notepad - Untitled.txt", app[0].frame.getTitle());
+//        }
+//
+//        // Clean up
+//        if (app[0].frame.isVisible()) {
+//            SwingUtilities.invokeAndWait(() -> app[0].frame.dispose());
+//        }
+//    }
+
+    @Test
+    void testTypingInTextArea() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Type text into the text area
+        window.textBox().enterText("Hello World");
+        robot.waitForIdle();
+
+        // Verify the text content
+        assertEquals("Hello World", app[0].textArea.getText());
+
+        // Clean up
+        window.cleanUp();
     }
 }

@@ -20,7 +20,7 @@ public class App extends JFrame implements ActionListener {
     JFileChooser fileChooser;
 
     // Menu Items
-    private JMenuItem miNew;
+    JMenuItem miNew;
     JMenuItem miOpen;
     private JMenuItem miSave;
 
@@ -245,7 +245,7 @@ public class App extends JFrame implements ActionListener {
      *
      * @param modified indicates if the document has been modified
      */
-    private void updateFrameTitle(boolean modified) {
+    void updateFrameTitle(boolean modified) {
         if (modified) {
             frame.setTitle(APP_TITLE_PREFIX + defaultTitle + " *");
         } else {
@@ -318,7 +318,7 @@ public class App extends JFrame implements ActionListener {
     /**
      * Resets the editor to the default state.
      */
-    private void resetEditor() {
+    void resetEditor() {
         textArea.setText("");
         defaultTitle = DEFAULT_TITLE_CONSTANT;
         updateFrameTitle(false);
