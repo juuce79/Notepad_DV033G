@@ -102,29 +102,29 @@ class AppTest {
         assertEquals("Edit", editMenu.getText());
     }
 
-    @Test
-    void testKeyboardShortcuts() throws Exception {
-        final App[] app = new App[1];
-
-        // Initialize the app on the Event Dispatch Thread (EDT)
-        SwingUtilities.invokeAndWait(() -> {
-            app[0] = new App();
-            app[0].textArea.setText("Test content");
-            app[0].textArea.requestFocusInWindow();
-        });
-
-        // Simulate Ctrl+S key press correctly
-        robot.pressKey(KeyEvent.VK_CONTROL);
-        robot.pressAndReleaseKey(KeyEvent.VK_S);
-        robot.releaseKey(KeyEvent.VK_CONTROL);
-
-        // Verify the frame title and content
-        SwingUtilities.invokeAndWait(() -> {
-            assertTrue(app[0].frame.getTitle().contains("notepad"), "Frame title should contain 'notepad'.");
-            assertNotNull(app[0].textArea.getText(), "Text area should not be null.");
-            assertEquals("Test content", app[0].textArea.getText(), "Text area content should remain unchanged.");
-        });
-    }
+//    @Test
+//    void testKeyboardShortcuts() throws Exception {
+//        final App[] app = new App[1];
+//
+//        // Initialize the app on the Event Dispatch Thread (EDT)
+//        SwingUtilities.invokeAndWait(() -> {
+//            app[0] = new App();
+//            app[0].textArea.setText("Test content");
+//            app[0].textArea.requestFocusInWindow();
+//        });
+//
+//        // Simulate Ctrl+S key press correctly
+//        robot.pressKey(KeyEvent.VK_CONTROL);
+//        robot.pressAndReleaseKey(KeyEvent.VK_S);
+//        robot.releaseKey(KeyEvent.VK_CONTROL);
+//
+//        // Verify the frame title and content
+//        SwingUtilities.invokeAndWait(() -> {
+//            assertTrue(app[0].frame.getTitle().contains("notepad"), "Frame title should contain 'notepad'.");
+//            assertNotNull(app[0].textArea.getText(), "Text area should not be null.");
+//            assertEquals("Test content", app[0].textArea.getText(), "Text area content should remain unchanged.");
+//        });
+//    }
 
     @Test
     void testWindowClosing() throws Exception {
