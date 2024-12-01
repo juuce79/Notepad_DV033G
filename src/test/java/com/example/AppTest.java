@@ -8,12 +8,8 @@ import org.assertj.swing.finder.WindowFinder;
 import org.assertj.swing.fixture.DialogFixture;
 import org.assertj.swing.fixture.FrameFixture;
 import org.junit.jupiter.api.*;
-import org.mockito.MockedStatic;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.io.File;
@@ -23,11 +19,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the App class.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppTest {
 
-    private Robot robot;
+    private Robot robot; // Robot for simulating user actions
 
+    /**
+     * Set up the test environment before running any tests.
+     */
     @BeforeAll
     public void setUp() {
         // Removed headless property
@@ -36,6 +38,9 @@ class AppTest {
         robot = BasicRobot.robotWithNewAwtHierarchy();
     }
 
+    /**
+     * Clean up after all tests have run.
+     */
     @AfterAll
     public void tearDown() {
         if (robot != null) {
@@ -43,11 +48,18 @@ class AppTest {
         }
     }
 
+    /**
+     * The only original test
+     */
     @Test
     void shouldAnswerWithTrue() {
         assertTrue(true);
     }
 
+    /**
+     * Test the App constructor.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testAppConstructor() throws Exception {
         final App[] app = new App[1];
@@ -57,6 +69,10 @@ class AppTest {
         assertTrue(app[0].frame.isVisible());
     }
 
+    /**
+     * Test the initializeFrame method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testInitializeFrame() throws Exception {
         final App[] app = new App[1];
@@ -71,6 +87,10 @@ class AppTest {
         assertTrue(frame.isVisible());
     }
 
+    /**
+     * Test the initializeTextArea method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testInitializeTextArea() throws Exception {
         final App[] app = new App[1];
@@ -86,6 +106,10 @@ class AppTest {
         assertEquals(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, scrollPane.getVerticalScrollBarPolicy());
     }
 
+    /**
+     * Test the initializeMenuBar method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testInitializeMenuBar() throws Exception {
         final App[] app = new App[1];
@@ -102,30 +126,10 @@ class AppTest {
         assertEquals("Edit", editMenu.getText());
     }
 
-//    @Test
-//    void testKeyboardShortcuts() throws Exception {
-//        final App[] app = new App[1];
-//
-//        // Initialize the app on the Event Dispatch Thread (EDT)
-//        SwingUtilities.invokeAndWait(() -> {
-//            app[0] = new App();
-//            app[0].textArea.setText("Test content");
-//            app[0].textArea.requestFocusInWindow();
-//        });
-//
-//        // Simulate Ctrl+S key press correctly
-//        robot.pressKey(KeyEvent.VK_CONTROL);
-//        robot.pressAndReleaseKey(KeyEvent.VK_S);
-//        robot.releaseKey(KeyEvent.VK_CONTROL);
-//
-//        // Verify the frame title and content
-//        SwingUtilities.invokeAndWait(() -> {
-//            assertTrue(app[0].frame.getTitle().contains("notepad"), "Frame title should contain 'notepad'.");
-//            assertNotNull(app[0].textArea.getText(), "Text area should not be null.");
-//            assertEquals("Test content", app[0].textArea.getText(), "Text area content should remain unchanged.");
-//        });
-//    }
-
+    /**
+     * Test the windowClosing method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testWindowClosing() throws Exception {
         final App[] app = new App[1];
@@ -171,6 +175,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the kill method with unsaved changes.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testKillWithoutUnsavedChanges() throws Exception {
         final App[] app = new App[1];
@@ -190,6 +198,10 @@ class AppTest {
         SwingUtilities.invokeAndWait(() -> assertFalse(app[0].frame.isVisible()));
     }
 
+    /**
+     * Test the kill method with unsaved changes.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testKillWithUnsavedChanges() throws Exception {
         final App[] app = new App[1];
@@ -236,6 +248,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the documentListener method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testDocumentListener() throws Exception {
         final App[] app = new App[1];
@@ -262,6 +278,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the handleMouseWheelEventZoomIn method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testHandleMouseWheelEventZoomIn() throws Exception {
         final App[] app = new App[1];
@@ -303,6 +323,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the handleMouseWheelEventZoomOut method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testSaveToPath() throws Exception {
         final App[] app = new App[1];
@@ -339,6 +363,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the openFile method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testOpenFile() throws Exception {
         final App[] app = new App[1];
@@ -376,6 +404,10 @@ class AppTest {
         }
     }
 
+    /**
+     * Test the updateFrameTitle method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testUpdateFrameTitle() throws Exception {
         final App[] app = new App[1];
@@ -405,6 +437,10 @@ class AppTest {
         window.cleanUp();
     }
 
+    /**
+     * Test the resetEditor method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testResetEditor() throws Exception {
         final App[] app = new App[1];
@@ -439,47 +475,10 @@ class AppTest {
         window.cleanUp();
     }
 
-//    @Test
-//    void testActionPerformed_New() throws Exception {
-//        final App[] app = new App[1];
-//
-//        // Mock JFileChooser
-//        JFileChooser mockFileChooser = mock(JFileChooser.class);
-//        when(mockFileChooser.showSaveDialog(any())).thenReturn(JFileChooser.CANCEL_OPTION);
-//
-//        // Mock JOptionPane
-//        try (MockedStatic<JOptionPane> mockedPane = mockStatic(JOptionPane.class)) {
-//            mockedPane.when(() -> JOptionPane.showConfirmDialog(
-//                            any(Component.class),
-//                            anyString(),
-//                            anyString(),
-//                            anyInt()))
-//                    .thenReturn(JOptionPane.NO_OPTION);
-//
-//            // Initialize the app on the EDT
-//            SwingUtilities.invokeAndWait(() -> {
-//                app[0] = new App();
-//                app[0].fileChooser = mockFileChooser; // Inject the mock
-//                app[0].frame.setVisible(true);
-//                app[0].textArea.setText("Unsaved changes");
-//                app[0].updateFrameTitle(true);
-//            });
-//
-//            // Trigger new file action using menu item
-//            SwingUtilities.invokeAndWait(() -> app[0].miNew.doClick());
-//            robot.waitForIdle();
-//
-//            // Verify the results
-//            assertEquals("", app[0].textArea.getText());
-//            assertEquals("notepad - Untitled.txt", app[0].frame.getTitle());
-//        }
-//
-//        // Clean up
-//        if (app[0].frame.isVisible()) {
-//            SwingUtilities.invokeAndWait(() -> app[0].frame.dispose());
-//        }
-//    }
-
+    /**
+     * Test the handleKeyTyped method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     void testTypingInTextArea() throws Exception {
         final App[] app = new App[1];
