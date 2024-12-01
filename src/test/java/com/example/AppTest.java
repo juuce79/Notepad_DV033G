@@ -480,29 +480,29 @@ class AppTest {
 //        }
 //    }
 
-//    @Test
-//    void testTypingInTextArea() throws Exception {
-//        final App[] app = new App[1];
-//        FrameFixture window;
-//
-//        // Initialize the app on the EDT
-//        SwingUtilities.invokeAndWait(() -> {
-//            app[0] = new App();
-//            app[0].frame.setVisible(true);
-//        });
-//
-//        // Create FrameFixture for AssertJ Swing
-//        window = new FrameFixture(robot, app[0].frame);
-//        window.show();
-//
-//        // Type text into the text area
-//        window.textBox().enterText("Hello World");
-//        robot.waitForIdle();
-//
-//        // Verify the text content
-//        assertEquals("Hello World", app[0].textArea.getText());
-//
-//        // Clean up
-//        window.cleanUp();
-//    }
+    @Test
+    void testTypingInTextArea() throws Exception {
+        final App[] app = new App[1];
+        FrameFixture window;
+
+        // Initialize the app on the EDT
+        SwingUtilities.invokeAndWait(() -> {
+            app[0] = new App();
+            app[0].frame.setVisible(true);
+        });
+
+        // Create FrameFixture for AssertJ Swing
+        window = new FrameFixture(robot, app[0].frame);
+        window.show();
+
+        // Type text into the text area
+        window.textBox().enterText("Hello World");
+        robot.waitForIdle();
+
+        // Verify the text content
+        assertEquals("Hello World", app[0].textArea.getText());
+
+        // Clean up
+        window.cleanUp();
+    }
 }
